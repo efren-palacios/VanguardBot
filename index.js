@@ -49,7 +49,7 @@ client.on("message", message => {
           card: x("article li h1 a@href", {
             image: ".image-thumbnail@href",
             effect: ".cftable .info-extra .effect tr:nth-of-type(2) td",
-            flavor: ".flavor td",
+            flavor: ".flavor td@html",
             label: [".cftable .info-main table td:nth-of-type(1)"],
             des: [".cftable .info-main table td:nth-of-type(2)"]
           })
