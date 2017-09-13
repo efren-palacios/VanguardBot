@@ -55,7 +55,6 @@ client.on("message", message => {
           })
         }
       )(function(err, obj) {
-        console.log(obj)
         if (obj.card.label.length === 0) {
           return message.channel.send("Sorry I couldn't find the card >.<");
         }
