@@ -37,7 +37,9 @@ client.on("message", message => {
     const regex = /\{(.*?)\}/g;
     let str = message.content.match(regex);
     let fullart = false;
-    if (message.content.includes("[art]")) fullart = true;
+    let alt = false;
+    if (message.content.includes("[art]") && !message.content.includes('[alt]')) fullart = true;
+    if (message.content.includes("[alt]") && !message.content.includes('[art]')) alt = true;
     str.forEach(i => {
       let s = i.replace(/[{}]+/g, "");
       let trim = s.trim();
@@ -49,6 +51,7 @@ client.on("message", message => {
           card: x("article li h1 a@href", {
             image: ".image-thumbnail@href",
             effect: ".cftable .info-extra .effect tr:nth-of-type(2) td",
+            alt: '.Japanese a@href',
             flavor: ".flavor td@html",
             label: [".cftable .info-main table td:nth-of-type(1)"],
             des: [".cftable .info-main table td:nth-of-type(2)"]
@@ -81,6 +84,14 @@ client.on("message", message => {
           }
         }
 
+        if (alt) {
+          if (!obj.card.alt) return message.channel.send("Sorry I couldn't find the card >.<")
+          let embed = new Discord.RichEmbed()
+          embed.setImage(obj.card.alt)
+          embed.setColor(WORLD[info["Nation"]])
+          embed.setTitle(info['Name'])
+          return message.channel.send({embed})
+        }
         if (fullart) {
           if (!obj.card.image) return message.channel.send("Sorry I couldn't find the card >.<")
           let embed = new Discord.RichEmbed()
