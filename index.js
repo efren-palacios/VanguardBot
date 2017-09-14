@@ -46,7 +46,7 @@ client.on("message", message => {
       if (!trim.length > 0) return;
       x(
         "http://cardfight.wikia.com/wiki/Special:Search?search=" +
-          encodeURI(trim),
+          encodeURI(trim) + "+kana",
         {
           card: x("article li h1 a@href", {
             image: ".image-thumbnail@href",
