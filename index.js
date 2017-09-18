@@ -6,8 +6,6 @@ const he = require('he')
 const _ = require('lodash')
 const database = require('./cards.json')
 const config = require('./config.json')
-const didyoumean = require('didyoumean')
-didyoumean.threshold = null
 const fuzzy = require('fuzzy')
 
 const WORLD = {
