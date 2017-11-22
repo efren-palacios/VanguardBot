@@ -44,6 +44,7 @@ client.on('message', message => {
     str.forEach(i => {
       let s = i.replace(/[{}]+/g, '')
       let trim = s.trim()
+      console.log(trim)
       if (!trim.length > 0) return
       const url = fuzzy.filter(trim, database, { extract: el => el.title })[0].original.url
       x(url,
