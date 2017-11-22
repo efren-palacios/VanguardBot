@@ -56,7 +56,6 @@ client.on('message', message => {
           des: ['.cftable .info-main table td:nth-of-type(2)']
         }
       )(function (err, obj) {
-        console.log(obj)
         if (obj.label.length === 0) {
           return message.channel.send("Sorry I couldn't find the card >.<")
         }
@@ -101,7 +100,7 @@ client.on('message', message => {
         }
 
         let embed = new Discord.RichEmbed()
-        let flavor = obj.flavor.split('<br>')
+        let flavor = obj.flavor ? (obj.flavor.split('<br>'))(he.decode(obj.flavor[obj.flavor.length - 1].replace(/<[^>]*>/g, ''))) : 'No Flavor Text'
         embed.setThumbnail(obj.image)
         embed.setColor(WORLD[info['Nation']])
         for (var item in info) {
@@ -111,9 +110,7 @@ client.on('message', message => {
           'Card Effect',
           _.escapeRegExp(obj.effect) || 'No Card Effect'
         )
-        embed.setDescription(
-          he.decode(flavor[flavor.length - 1].replace(/<[^>]*>/g, ''))
-)
+        embed.setDescription(flavor)
         return message.channel.send({ embed })
       })
     })
