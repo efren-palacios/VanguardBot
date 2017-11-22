@@ -44,7 +44,6 @@ client.on('message', message => {
     str.forEach(i => {
       let s = i.replace(/[{}]+/g, '')
       let trim = s.trim()
-      console.log(trim)
       if (!trim.length > 0) return
       const url = fuzzy.filter(trim, database, { extract: el => el.title })[0].original.url
       x(url,
@@ -57,6 +56,7 @@ client.on('message', message => {
           des: ['.cftable .info-main table td:nth-of-type(2)']
         }
       )(function (err, obj) {
+        console.log(obj)
         if (obj.label.length === 0) {
           return message.channel.send("Sorry I couldn't find the card >.<")
         }
